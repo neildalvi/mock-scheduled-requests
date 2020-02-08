@@ -6,12 +6,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 public class HelloController {
+	
+	private int counter = -1;
 
-	@Scheduled(fixedRate = 10000)
 	@RequestMapping("/")
-	public String index() {
-		System.out.println("Request Called");
+	public String index(String input) {
+		System.out.println("Request Called" + input);
 		return "Greetings from Spring Boot!";
+	}
+
+	@Scheduled(fixedRate = 5000)
+	public String mockIndex() {
+		counter++;
+		return index(" mocking " + counter);
 	}
 
 }
